@@ -1124,7 +1124,10 @@ const Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }
     }, [calendarData.date, isDateTooEarly, isDateTooLate, disabledDates]);
     const buttonClass = useCallback((day, type) => {
         const baseClass = "flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10";
-        return classNames(baseClass, !activeDateData(day).active ? hoverClassByDay(day) : activeDateData(day).className, isDateDisabled(day, type) && "line-through", (type === "previous" || type === "next") && "text-gray-400");
+        return classNames(baseClass, type === "current" &&
+            (!activeDateData(day).active
+                ? hoverClassByDay(day)
+                : activeDateData(day).className), isDateDisabled(day, type) && "line-through", (type === "previous" || type === "next") && "text-gray-400");
     }, [activeDateData, hoverClassByDay, isDateDisabled]);
     const hoverDay = useCallback((day, type) => {
         const object = {
